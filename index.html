@@ -7,29 +7,31 @@
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #dfe9f3, #ffffff);
       height: 100vh;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
     .card {
-      background: white;
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(10px);
       padding: 40px;
-      border-radius: 20px;
+      border-radius: 25px;
       max-width: 600px;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
       opacity: 0;
-      transform: translateY(20px);
-      animation: fadeIn 2s forwards;
+      transform: scale(0.95);
+      animation: fadeIn 1.8s ease forwards;
     }
 
     h1 {
       margin-bottom: 10px;
-      color: #333;
+      color: #222;
     }
 
     h2 {
@@ -40,21 +42,51 @@
 
     p {
       color: #444;
-      line-height: 1.6;
+      line-height: 1.7;
       font-size: 18px;
+    }
+
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(173, 216, 230, 0.3);
+      animation: float 10s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-30px); }
     }
 
     @keyframes fadeIn {
       to {
         opacity: 1;
-        transform: translateY(0);
+        transform: scale(1);
       }
+    }
+
+    #musicBtn {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 20px;
+      background: #444;
+      color: white;
+      cursor: pointer;
     }
   </style>
 </head>
 
 <body>
 
+  <!-- hiệu ứng nền -->
+  <div class="circle" style="width:100px;height:100px;top:10%;left:15%;"></div>
+  <div class="circle" style="width:150px;height:150px;top:70%;left:70%;"></div>
+  <div class="circle" style="width:80px;height:80px;top:50%;left:30%;"></div>
+
+  <!-- nội dung -->
   <div class="card">
     <h1>🎂 Chúc mừng sinh nhật 🎂</h1>
     <h2>Chị Hoài Anh</h2>
@@ -69,6 +101,28 @@
 
     <p style="margin-top: 30px;">🌷</p>
   </div>
+
+  <!-- nhạc -->
+  <audio id="music" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mpeg">
+  </audio>
+
+  <button id="musicBtn">🔊 Bật nhạc</button>
+
+  <script>
+    const music = document.getElementById("music");
+    const btn = document.getElementById("musicBtn");
+
+    btn.onclick = function() {
+      if (music.paused) {
+        music.play();
+        btn.innerText = "🔈 Tắt nhạc";
+      } else {
+        music.pause();
+        btn.innerText = "🔊 Bật nhạc";
+      }
+    };
+  </script>
 
 </body>
 </html>
